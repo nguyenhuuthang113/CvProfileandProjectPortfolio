@@ -3,7 +3,7 @@
 
 A modern and responsive personal portfolio website built with **HTML**, **CSS**, and **JavaScript**. Perfect for showcasing your **CV, projects, contact information**, and **personal branding**.
 
-![Website Preview/Desktop Screenshot](https://i.postimg.cc/FH5McLPk/image.png)
+![Website Preview](https://i.postimg.cc/FH5McLPk/image.png)
 
 ## 📌 Features
 
@@ -24,6 +24,10 @@ A modern and responsive personal portfolio website built with **HTML**, **CSS**,
 ---
 
 ## 📸 Screenshots
+
+### 💻 Desktop View
+
+![Desktop Screenshot](https://i.postimg.cc/FH5McLPk/image.png)
 
 ### 📱 Mobile View
 
