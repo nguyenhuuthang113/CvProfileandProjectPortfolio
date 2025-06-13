@@ -257,6 +257,18 @@ article { display: none; }
     letter-spacing: -0.25px;
     margin-bottom: 10px;
 }
+/* .info-content .name {
+    color: var(--white2);
+    font-size: var(--fs3);
+    font-weight: var(--fw500);
+    letter-spacing: -0.25px;
+    margin-bottom: 10px;
+    background-image: url('https://thanhnien.mediacdn.vn/Uploaded/maiha/2022_09_12/ban-gioc-waterfall-2-1-6623.jpg');
+    background-size: cover;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+} */
 
 .info-content .title {
     color: var(--white1);
@@ -433,8 +445,8 @@ article { display: none; }
 
 .service-list {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: 20px;
+    gap: 30px;
+    animation: fadeInUp 0.8s ease forwards;
 }
 
 .service-item {
@@ -444,6 +456,8 @@ article { display: none; }
     border-radius: 14px;
     box-shadow: var(--shadow2);
     z-index: 1;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
 }
 
     .service-item::before {
@@ -454,18 +468,70 @@ article { display: none; }
         border-radius: inherit;
         z-index: -1;
     }
+    .service-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+    }
+    .service-item::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        padding: 1px;
+        background: linear-gradient(
+            45deg,
+            var(--orange-yellow-crayola),
+            transparent 50%
+        );
+        -webkit-mask: 
+            linear-gradient(#fff 0 0) content-box, 
+            linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+    .service-item:hover::after {
+        opacity: 1;
+    }
+    
 
-.service-icon-box { margin-bottom: 10px; }
-    .service-icon-box img { margin: auto; }
+/* Icon box animations */
+.service-icon-box {
+    position: relative;
+    margin-bottom: 15px;
+    transition: transform 0.3s ease;
+}
+
+    .service-icon-box img {
+        transition: transform 0.5s ease;
+    }
+
+.service-item:hover .service-icon-box img {
+    transform: scale(1.1) rotate(5deg);
+}
 
 .service-content-box { text-align: center; }
-.service-item-title { margin-bottom: 7px; }
+.service-item-title {
+    color: var(--white2);
+    font-size: var(--fs4);
+    font-weight: var(--fw500);
+    margin-bottom: 10px;
+    transition: color 0.3s ease;
+}
+.service-item:hover .service-item-title {
+    color: var(--orange-yellow-crayola);
+}
 
 .service-item-text {
     color: var(--light-gray);
     font-size: var(--fs6);
     font-weight: var(--fw300);
     line-height: 1.6;
+    transition: transform 0.3s ease;
+}
+.service-item:hover .service-item-text {
+    transform: translateX(5px);
 }
 
 /*TESTIMONIALS*/
@@ -1001,7 +1067,7 @@ article { display: none; }
         width: 100%;
         height: 100%;
         border: none;
-        filter: grayscale(1) invert(1);
+        filter: grayscale(0.5) invert(1) brightness(1.2);;
     }
 
 .contact-form { margin-bottom: 10px; }
@@ -1543,6 +1609,233 @@ textarea.form-input {
     transform: translateY(-3px);
 }
 
+/* SOCIAL LINKS ANIMATION */
+@keyframes socialBounce {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+}
+
+@keyframes socialGlow {
+    0%, 100% {
+        box-shadow: 0 0 5px var(--orange-yellow-crayola);
+    }
+    50% {
+        box-shadow: 0 0 15px var(--orange-yellow-crayola);
+    }
+}
+
+.social-item .social-link {
+    color: var(--light-gray70);
+    font-size: 18px;
+    position: relative;
+    padding: 8px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.social-item .social-link:hover {
+    color: var(--orange-yellow-crayola);
+    background: var(--eerie-black2);
+    animation: socialBounce 0.6s ease-in-out, socialGlow 1.5s infinite;
+    transform-origin: center;
+}
+
+.social-item .social-link::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: var(--onyx);
+    transform: scale(0);
+    transition: transform 0.3s ease;
+    z-index: -1;
+}
+
+.social-item .social-link:hover::before {
+    transform: scale(1);
+}
+
+/* Thêm độ trễ cho từng icon */
+.social-item:nth-child(1) .social-link {
+    animation-delay: 0.1s;
+}
+
+.social-item:nth-child(2) .social-link {
+    animation-delay: 0.2s;
+}
+
+.social-item:nth-child(3) .social-link {
+    animation-delay: 0.3s;
+}
+/* CONTACT INFO ANIMATION */
+@keyframes iconPulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(var(--orange-yellow-crayola), 0.7);
+    }
+    70% {
+        transform: scale(1.1);
+        box-shadow: 0 0 0 10px rgba(var(--orange-yellow-crayola), 0);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(var(--orange-yellow-crayola), 0);
+    }
+}
+
+@keyframes slideIn {
+    0% {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.contact-item {
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.contact-item:hover {
+    transform: translateX(5px);
+}
+
+.contact-item .icon-box {
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.contact-item:hover .icon-box {
+    background: var(--orange-yellow-crayola);
+    animation: iconPulse 1.5s infinite;
+}
+
+.contact-item:hover .icon-box ion-icon {
+    /* color: var(--eerie-black2); */
+    transform: scale(1.2);
+}
+
+.contact-info {
+    animation: slideIn 0.5s ease-out;
+}
+
+.contact-title {
+    position: relative;
+    display: inline-block;
+}
+
+.contact-title::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--orange-yellow-crayola);
+    transition: width 0.3s ease;
+}
+
+.contact-item:hover .contact-title::after {
+    width: 100%;
+}
+
+.contact-link, .contact-info time, .contact-info address {
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.contact-item:hover .contact-link,
+.contact-item:hover time,
+.contact-item:hover address {
+    color: var(--orange-yellow-crayola);
+    letter-spacing: 0.5px;
+}
+
+/* Độ trễ cho từng item */
+.contact-item:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.contact-item:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.contact-item:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.contact-item:nth-child(4) {
+    animation-delay: 0.4s;
+}
+
+/* Animation cho nút Show/Hide Contacts */
+.info-more-btn {
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    border-radius: 0 15px;
+    font-size: 13px;
+    color: var(--orange-yellow-crayola);
+    background: var(--bg-gradient-yellow1);
+    padding: 10px;
+    box-shadow: var(--shadow2);
+    transition: var(--transition1);
+    z-index: 1;
+}
+.info-more-btn::before {
+    content: '';
+    position: absolute;
+    inset: 1px;
+    border-radius: inherit;
+    background: var(--bg-gradient-yellow2); /* Thêm gradient vàng mặc định */
+    transition: var(--transition1);
+    z-index: -1;
+}
+
+/* Animation cho nút Show/Hide Contacts */
+.info-more-btn ion-icon {
+    transition: transform 0.5s ease;
+    animation: arrowBounce 0.5s ease infinite; /* Thêm animation mặc định */
+}
+
+/* Khi sidebar active (mở rộng), xoay mũi tên 180 độ và đổi animation */
+.sidebar.active .info-more-btn ion-icon {
+    transform: rotate(180deg);
+    animation: arrowBounceUp 0.5s ease infinite; /* Đổi sang animation khác khi active */
+}
+/* Animation cho mũi tên bounce */
+@keyframes arrowBounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(3px);
+    }
+}
+
+/* Khi sidebar active và hover, kết hợp cả xoay và bounce */
+.sidebar.active .info-more-btn:hover ion-icon {
+    animation: arrowBounceUp 0.5s ease infinite;
+}
+
+@keyframes arrowBounceUp {
+    0%, 100% {
+        transform: rotate(180deg) translateY(0);
+    }
+    50% {
+        transform: rotate(180deg) translateY(-3px);
+    }
+}
+
+
 /* NAVBAR ANIMATION */
 .navbar {
     background: rgba(var(--eerie-black2), 0.9);
@@ -1554,8 +1847,7 @@ textarea.form-input {
     position: relative;
 }
 
-/* Reset style khi hover vào navbar-list */
-.navbar-list:hover .navbar-link:not(:hover):not(.active) {
+.navbar-list:hover .navbar-link:not(:hover) {
     color: var(--light-gray70);
     transform: scale(1);
     background: transparent;
@@ -1570,16 +1862,13 @@ textarea.form-input {
     overflow: hidden;
 }
 
-/* Combined hover effects */
+/* Hiệu ứng glow khi hover */
 .navbar-link:hover {
     color: var(--orange-yellow-crayola);
-    transform: scale(1.05);
-    background: rgba(var(--orange-yellow-crayola), 0.1);
-    border-radius: 4px;
     text-shadow: 0 0 8px rgba(var(--orange-yellow-crayola), 0.5);
 }
 
-/* Underline animation */
+/* Hiệu ứng underline animation */
 .navbar-link::before {
     content: '';
     position: absolute;
@@ -1592,25 +1881,84 @@ textarea.form-input {
     transition: width 0.3s ease;
 }
 
-.navbar-link:hover::before,
+.navbar-link:hover::before {
+    width: 100%;
+}
+
+/* Active link styles */
+.navbar-link.active {
+    color: var(--orange-yellow-crayola);
+    transform: translateY(-2px);
+}
+
 .navbar-link.active::before {
     width: 100%;
 }
 
-/* Active state */
-.navbar-link.active {
-    color: var(--orange-yellow-crayola);
-    transform: translateY(-2px);
-    background: rgba(var(--orange-yellow-crayola), 0.1);
-    border-radius: 4px;
+/* Hiệu ứng pulse cho active link */
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(var(--orange-yellow-crayola), 0.4);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(var(--orange-yellow-crayola), 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(var(--orange-yellow-crayola), 0);
+    }
 }
 
-/* Animation khi chuyển tab */
+/* Hiệu ứng chuyển đổi giữa các tab */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Áp dụng animation khi chuyển tab */
 .navbar-link[data-nav-link].active {
     animation: slideIn 0.3s ease forwards;
 }
 
-/* Ripple effect khi click */
+/* Hover effect với scale và background */
+.navbar-link:hover {
+    color: var(--orange-yellow-crayola);
+    transform: scale(1.05);
+    background: rgba(var(--orange-yellow-crayola), 0.1);
+    border-radius: 4px;
+    text-shadow: 0 0 8px rgba(var(--orange-yellow-crayola), 0.5);
+}
+/* Contact Items Animation */
+.contacts-list:hover .contact-item:not(:hover) {
+    transform: translateX(0);
+}
+
+.contacts-list:hover .contact-item:not(:hover) .icon-box {
+    background: var(--border-gradient-onyx);
+    animation: none;
+}
+
+/* Social Links Animation */
+.social-list:hover .social-item:not(:hover) .social-link {
+    color: var(--light-gray70);
+    background: transparent;
+    transform: scale(1);
+    animation: none;
+}
+
+/* Developer/Design Titles Animation */
+.info-content > div:hover .title:not(:hover) {
+    background: var(--onyx);
+    color: var(--white1);
+    transform: translateY(0);
+    animation: none;
+}
+/* Hiệu ứng ripple khi click */
 .navbar-link::after {
     content: '';
     position: absolute;
@@ -1630,4 +1978,82 @@ textarea.form-input {
     opacity: 1;
     transform: scale(1);
     transition: 0s;
+}
+
+/* Shine effect */
+.service-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(255, 255, 255, 0.1),
+        transparent
+    );
+    transition: 0.5s;
+}
+
+.service-item:hover::before {
+    left: 100%;
+}
+
+/* Stagger animation for items */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.service-item {
+    opacity: 0;
+    animation: fadeInUp 0.5s ease forwards;
+}
+
+.service-item:nth-child(1) { animation-delay: 0.1s; }
+.service-item:nth-child(2) { animation-delay: 0.2s; }
+.service-item:nth-child(3) { animation-delay: 0.3s; }
+.service-item:nth-child(4) { animation-delay: 0.4s; }
+
+/* Float animation */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+.service-icon-box {
+    animation: float 3s ease-in-out infinite;
+}
+
+/* Responsive adjustments */
+@media (min-width: 768px) {
+    .service-list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 767px) {
+    .service-item {
+        padding: 15px;
+    }
+    
+    .service-icon-box img {
+        width: 35px;
+    }
+    
+    .service-item-title {
+        font-size: var(--fs5);
+    }
 }

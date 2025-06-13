@@ -1,0 +1,95 @@
+/* Cursor Effects */
+.cursor {
+    pointer-events: none;
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    background: var(--orange-yellow-crayola);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.2s, height 0.2s, background-color 0.3s;
+    z-index: 9999;
+    mix-blend-mode: difference;
+    box-shadow: 0 0 15px var(--orange-yellow-crayola);
+    filter: blur(0.5px);
+}
+
+.cursor.active {
+    width: 20px;
+    height: 20px;
+    background: transparent;
+    border: 2px solid var(--orange-yellow-crayola);
+    filter: none;
+}
+
+.trail {
+    pointer-events: none;
+    position: fixed;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--orange-yellow-crayola);
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.8);
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    z-index: 9998;
+    filter: blur(1px);
+    box-shadow: 0 0 10px var(--orange-yellow-crayola);
+}
+
+/* Hover effects for interactive elements */
+a:hover ~ .cursor,
+button:hover ~ .cursor,
+[data-nav-link]:hover ~ .cursor {
+    transform: translate(-50%, -50%) scale(2);
+    background: transparent;
+    border: 2px solid var(--orange-yellow-crayola);
+    mix-blend-mode: normal;
+}
+
+/* Custom effects for different interactive elements */
+.title:hover ~ .cursor {
+    border-radius: 0;
+    transform: translate(-50%, -50%) rotate(45deg) scale(1.5);
+}
+
+.avatar-box:hover ~ .cursor {
+    border-radius: 20px;
+    transform: translate(-50%, -50%) scale(1.8);
+}
+
+/* Animation for trails */
+@keyframes trailFade {
+    0% {
+        opacity: 0.5;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.3);
+    }
+}
+
+.trail.active {
+    animation: trailFade 0.5s ease-out forwards;
+}
+
+/* Hide default cursors */
+* {
+    cursor: none !important;
+}
+
+/* Ensure interactive elements still feel clickable without showing cursor */
+a, 
+button, 
+[data-nav-link],
+.avatar-box,
+.title,
+.info-content,
+input,
+textarea,
+select {
+    cursor: none !important;
+}
+
+/* ...existing cursor and trail styles... */
